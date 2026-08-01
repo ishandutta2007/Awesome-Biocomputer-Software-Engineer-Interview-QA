@@ -1,0 +1,208 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 350" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05070f"/>
+      <stop offset="50%" stop-color="#0a0f24"/>
+      <stop offset="100%" stop-color="#05070f"/>
+    </linearGradient>
+
+    <!-- Bio (Green) Glow -->
+    <filter id="glow-bio" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Tech (Cyan) Glow -->
+    <filter id="glow-tech" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Text Glow -->
+    <filter id="glow-text" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Bi-color Gradient for text/lines -->
+    <linearGradient id="bio-tech-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+
+  <style>
+    .bg { fill: url(#bg-grad); }
+    
+    /* Animations */
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.15); }
+    }
+    
+    @keyframes dash {
+      to {
+        stroke-dashoffset: -80;
+      }
+    }
+    
+    @keyframes scanline {
+      0% { transform: translateY(0px); opacity: 0.1; }
+      50% { opacity: 0.3; }
+      100% { transform: translateY(350px); opacity: 0.1; }
+    }
+
+    /* Classes */
+    .node-bio {
+      fill: #10b981;
+      filter: url(#glow-bio);
+      transform-origin: center;
+    }
+    .node-tech {
+      fill: #06b6d4;
+      filter: url(#glow-tech);
+      transform-origin: center;
+    }
+    .pulse-slow {
+      animation: pulse 4s infinite ease-in-out;
+    }
+    .pulse-fast {
+      animation: pulse 2.5s infinite ease-in-out;
+    }
+    .connection-flow {
+      stroke: url(#bio-tech-grad);
+      stroke-width: 2;
+      stroke-dasharray: 10, 15;
+      animation: dash 3s linear infinite;
+    }
+    .connection-flow-reverse {
+      stroke: url(#bio-tech-grad);
+      stroke-width: 1.5;
+      stroke-dasharray: 8, 12;
+      animation: dash 4s linear infinite reverse;
+    }
+    .grid-lines {
+      stroke: #1e293b;
+      stroke-width: 0.5;
+      opacity: 0.4;
+    }
+    .scan {
+      fill: none;
+      stroke: #38bdf8;
+      stroke-width: 1;
+      opacity: 0.2;
+      animation: scanline 6s linear infinite;
+    }
+    .title-text {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-weight: 800;
+      fill: #ffffff;
+      font-size: 32px;
+      letter-spacing: 2px;
+    }
+    .subtitle-text {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-weight: 500;
+      fill: #94a3b8;
+      font-size: 14px;
+      letter-spacing: 4px;
+    }
+    .binary-code {
+      font-family: monospace;
+      font-size: 10px;
+      fill: #1e293b;
+      opacity: 0.6;
+    }
+  </style>
+
+  <!-- Background Rect -->
+  <rect width="100%" height="100%" class="bg" />
+
+  <!-- Background Binary & Grid -->
+  <g class="binary-code">
+    <text x="50" y="50">01010011 01000101</text>
+    <text x="50" y="80">10101011 00101101</text>
+    <text x="50" y="110">01100001 01111000</text>
+    <text x="1000" y="250">01110011 01111001</text>
+    <text x="1000" y="280">01101110 01100001</text>
+    <text x="1000" y="310">01110000 01110011</text>
+  </g>
+
+  <g class="grid-lines">
+    <path d="M 0,50 L 1200,50 M 0,100 L 1200,100 M 0,150 L 1200,150 M 0,200 L 1200,200 M 0,250 L 1200,250 M 0,300 L 1200,300" />
+    <path d="M 100,0 L 100,350 M 200,0 L 200,350 M 300,0 L 300,350 M 400,0 L 400,350 M 500,0 L 500,350 M 600,0 L 600,350 M 700,0 L 700,350 M 800,0 L 800,350 M 900,0 L 900,350 M 1000,0 L 1000,350 M 1100,0 L 1100,350" />
+  </g>
+
+  <!-- Biological/Neural Networks (Left Side) -->
+  <!-- Cell Bodies / Organoid Nodes -->
+  <g>
+    <!-- Axons / Connections -->
+    <path d="M 150,180 Q 220,120 300,150" fill="none" class="connection-flow-reverse" />
+    <path d="M 100,100 Q 180,90 220,140" fill="none" class="connection-flow" />
+    <path d="M 220,140 Q 250,220 180,260" fill="none" class="connection-flow-reverse" />
+    <path d="M 180,260 Q 120,230 150,180" fill="none" class="connection-flow" />
+    <path d="M 100,100 Q 120,150 150,180" fill="none" class="connection-flow-reverse" />
+    <path d="M 220,140 Q 310,120 400,160" fill="none" class="connection-flow" />
+    <path d="M 180,260 Q 300,280 450,220" fill="none" class="connection-flow" stroke-width="3" />
+    
+    <!-- Neuronal Nodes -->
+    <circle cx="100" cy="100" r="10" class="node-bio pulse-slow" />
+    <circle cx="150" cy="180" r="14" class="node-bio pulse-fast" />
+    <circle cx="220" cy="140" r="8" class="node-bio pulse-slow" />
+    <circle cx="180" cy="260" r="12" class="node-bio pulse-fast" />
+  </g>
+
+  <!-- Silicon / Hardware & Algorithms (Right Side) -->
+  <!-- Circuit Nodes & Digital Paths -->
+  <g>
+    <path d="M 1100,100 L 1020,140" fill="none" class="connection-flow" />
+    <path d="M 1020,140 L 1050,220" fill="none" class="connection-flow-reverse" />
+    <path d="M 1050,220 L 980,260" fill="none" class="connection-flow" />
+    <path d="M 980,260 L 1080,280" fill="none" class="connection-flow-reverse" />
+    <path d="M 1100,100 L 1050,220" fill="none" class="connection-flow" />
+    <path d="M 1020,140 L 880,150" fill="none" class="connection-flow-reverse" />
+    <path d="M 980,260 L 800,220" fill="none" class="connection-flow" stroke-width="3" />
+
+    <circle cx="1100" cy="100" r="9" class="node-tech pulse-slow" />
+    <circle cx="1020" cy="140" r="11" class="node-tech pulse-fast" />
+    <circle cx="1050" cy="220" r="7" class="node-tech pulse-slow" />
+    <circle cx="980" cy="260" r="13" class="node-tech pulse-fast" />
+    <circle cx="1080" cy="280" r="8" class="node-tech pulse-slow" />
+  </g>
+
+  <!-- The Bridge / Interface (Center) -->
+  <g>
+    <!-- Bridge Connections -->
+    <path d="M 220,140 C 400,50 800,50 1020,140" fill="none" class="connection-flow" />
+    <path d="M 180,260 C 400,320 800,320 980,260" fill="none" class="connection-flow-reverse" />
+    
+    <!-- Central Processing/Interface Hub -->
+    <circle cx="600" cy="185" r="45" fill="none" stroke="url(#bio-tech-grad)" stroke-width="2" stroke-dasharray="5, 10" class="connection-flow" />
+    <circle cx="600" cy="185" r="35" fill="none" stroke="url(#bio-tech-grad)" stroke-width="1.5" stroke-dasharray="8, 4" class="connection-flow-reverse" />
+    <circle cx="600" cy="185" r="10" fill="#ffffff" filter="url(#glow-tech)" class="pulse-fast" />
+  </g>
+
+  <!-- Titles -->
+  <g transform="translate(600, 185)" text-anchor="middle">
+    <!-- Main Title with Glow -->
+    <text y="-70" class="title-text" filter="url(#glow-text)">AWESOME BIOCOMPUTER</text>
+    <text y="-30" class="title-text" filter="url(#glow-text)">SOFTWARE ENGINEERING</text>
+    
+    <!-- Subtitle -->
+    <text y="75" class="subtitle-text">INTERVIEW QUESTION &amp; ANSWER REPOSITORY</text>
+  </g>
+
+  <!-- Dynamic scan line -->
+  <line x1="0" y1="0" x2="1200" y2="0" class="scan" />
+</svg>
